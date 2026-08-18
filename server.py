@@ -4,7 +4,7 @@ import json
 import os
 
 PORT = int(os.environ.get("PORT", 3000))
-DATABASE_URL = os.environ.get("DATABASE_URL")  # Set by Render automatically
+DATABASE_URL = os.environ.get("DATABASE_URL")  # Set automatically by Railway/Render
 
 # ─── Database helpers ─────────────────────────────────────────────────────────
 
@@ -128,16 +128,18 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
             c = conn.cursor()
             c.execute('SELECT * FROM responses ORDER BY created_at DESC')
             rows = c.fetchall()
-            conn.close()
 
             if db_type == 'pg':
+                # Read column names BEFORE closing connection
                 col_names = [desc[0] for desc in c.description]
+                conn.close()
                 responses = [dict(zip(col_names, row)) for row in rows]
                 # Convert datetime objects to string for JSON serialization
                 for r in responses:
                     if r.get('created_at'):
                         r['created_at'] = str(r['created_at'])
             else:
+                conn.close()
                 responses = [dict(row) for row in rows]
 
             self.send_response(200)
