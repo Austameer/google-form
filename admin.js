@@ -39,7 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
             responsesBody.innerHTML = '';
             data.forEach(item => {
                 const tr = document.createElement('tr');
-                const date = new Date(item.created_at).toLocaleString();
+                
+                // Fix date parsing for cross-browser compatibility
+                const dateStr = item.created_at ? item.created_at.replace(' ', 'T') : '';
+                const date = dateStr ? new Date(dateStr).toLocaleString() : 'N/A';
                 
                 tr.innerHTML = `
                     <td>${date}</td>
@@ -76,8 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Helper function to prevent XSS
     function escapeHTML(str) {
-        if (!str) return '';
-        return str.replace(/[&<>'"]/g, 
+        if (str === null || str === undefined) return '';
+        return String(str).replace(/[&<>'"]/g, 
             tag => ({
                 '&': '&amp;',
                 '<': '&lt;',
