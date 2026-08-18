@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-header">
+            <h1>Student Registration</h1>
+            <p>Please fill out the form below with your details.</p>
+            <div class="header-accent"></div>
+        </div>
+
+        <form id="studentForm">
+            <!-- Student Name -->
+            <div class="form-group">
+                <input type="text" id="studentName" name="studentName" class="form-control" placeholder=" " required>
+                <label for="studentName" class="floating-label">Student Name *</label>
+                <div class="underline"></div>
+            </div>
+
+            <!-- Department -->
+            <div class="form-group">
+                <input type="text" id="department" name="department" class="form-control" placeholder=" " required>
+                <label for="department" class="floating-label">Department *</label>
+                <div class="underline"></div>
+            </div>
+
+            <!-- Section -->
+            <div class="form-group">
+                <input type="text" id="section" name="section" class="form-control" placeholder=" " required>
+                <label for="section" class="floating-label">Section *</label>
+                <div class="underline"></div>
+            </div>
+
+            <!-- Student Contact Number -->
+            <div class="form-group">
+                <input type="tel" id="studentContact" name="studentContact" class="form-control" placeholder=" " required pattern="[0-9]{10,15}">
+                <label for="studentContact" class="floating-label">Student Contact Number *</label>
+                <div class="underline"></div>
+            </div>
+
+            <!-- Parents' Contact Info Section -->
+            <div class="section-title">Parent Contact Details</div>
+            <div class="section-desc">Please provide at least one parent's contact number.</div>
+
+            <!-- Father's Contact Number -->
+            <div class="form-group">
+                <input type="tel" id="fatherContact" name="fatherContact" class="form-control parent-contact" placeholder=" " pattern="[0-9]{10,15}">
+                <label for="fatherContact" class="floating-label">Father's Contact Number</label>
+                <div class="underline"></div>
+            </div>
+
+            <!-- Mother's Contact Number -->
+            <div class="form-group">
+                <input type="tel" id="motherContact" name="motherContact" class="form-control parent-contact" placeholder=" " pattern="[0-9]{10,15}">
+                <label for="motherContact" class="floating-label">Mother's Contact Number</label>
+                <div class="underline"></div>
+            </div>
+
+            <div id="parentContactError" class="error-message">At least one parent contact number is required.</div>
+
+            <!-- Bloombyte Login Option -->
+            <div class="form-group radio-group">
+                <label class="group-label">Bloombyte Login Option *</label>
+                <div class="radio-options">
+                    <label class="radio-container">
+                        <input type="radio" name="bloombyteOption" value="yes" required>
+                        <span class="checkmark"></span>
+                        Yes
+                    </label>
+                    <label class="radio-container">
+                        <input type="radio" name="bloombyteOption" value="no" required>
+                        <span class="checkmark"></span>
+                        No
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn-clear" id="clearBtn">Clear form</button>
+                <button type="submit" class="btn-submit">Submit</button>
+            </div>
+            
+            <div id="successMessage" class="success-message">Registration submitted successfully!</div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
