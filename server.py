@@ -5,7 +5,7 @@ import json
 import urllib.parse
 import os
 
-PORT = 3000
+PORT = int(os.environ.get("PORT", 3000))
 DB_FILE = 'database.sqlite'
 
 def init_db():
