@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Responses</title>
+    <title>Admin Dashboard - Student Responses</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -11,12 +11,12 @@
     <style>
         .dashboard-container {
             width: 100%;
-            max-width: 1000px;
+            max-width: 1100px;
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
-        
+
         .table-container {
             background-color: var(--card-bg);
             border-radius: var(--border-radius);
@@ -24,18 +24,67 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             overflow-x: auto;
             padding: 24px;
-            display: none; /* Hidden until authenticated */
+            display: none;
+        }
+
+        .table-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        #totalCount {
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .toolbar-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-refresh, .btn-export {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-refresh {
+            background: #ede9fe;
+            color: #673ab7;
+        }
+
+        .btn-refresh:hover {
+            background: #d8b4fe;
+        }
+
+        .btn-export {
+            background: #673ab7;
+            color: white;
+        }
+
+        .btn-export:hover {
+            background: #5b21b6;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         th, td {
             text-align: left;
-            padding: 12px;
+            padding: 10px 12px;
             border-bottom: 1px solid var(--border-color);
         }
 
@@ -43,6 +92,12 @@
             font-weight: 600;
             color: var(--text-secondary);
             white-space: nowrap;
+            background: #f9f7ff;
+        }
+
+        td:first-child {
+            color: var(--text-secondary);
+            font-size: 12px;
         }
 
         tr:hover td {
@@ -67,8 +122,9 @@
             border: 1px solid var(--border-color);
             border-radius: 4px;
             font-family: inherit;
+            box-sizing: border-box;
         }
-        
+
         .empty-state {
             text-align: center;
             padding: 40px;
@@ -81,7 +137,7 @@
     <div class="dashboard-container">
         <div class="form-header">
             <h1>Admin Dashboard</h1>
-            <p>View all student registration responses.</p>
+            <p>View all student registration responses — data is permanently stored.</p>
             <div class="header-accent"></div>
         </div>
 
@@ -93,9 +149,17 @@
         </div>
 
         <div id="tableSection" class="table-container">
+            <div class="table-toolbar">
+                <span id="totalCount">Total Responses: 0</span>
+                <div class="toolbar-actions">
+                    <button class="btn-refresh" id="refreshBtn">🔄 Refresh</button>
+                    <button class="btn-export" id="exportBtn">📥 Export CSV</button>
+                </div>
+            </div>
             <table>
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Date</th>
                         <th>Name</th>
                         <th>Dept</th>
@@ -110,7 +174,7 @@
                     <!-- Data injected here -->
                 </tbody>
             </table>
-            <div id="emptyState" class="empty-state" style="display:none;">No responses found.</div>
+            <div id="emptyState" class="empty-state" style="display:none;">No responses found yet.</div>
         </div>
     </div>
 
